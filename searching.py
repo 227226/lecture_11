@@ -23,6 +23,11 @@ def read_data(file_name, field):
 
 
 def linear_search(sequence, searched_number):
+    """
+    :param sequence: (list)
+    :param searched_number: (int)
+    :return: (dict)
+    """
 
     count = 0
     positions = []
@@ -34,7 +39,23 @@ def linear_search(sequence, searched_number):
     return {"positions": positions, "count": count}
 
 
+def pattern_search(dna_sequence, codon):
+    positions = set()
+    i = 0
+    j = i + len(codon)
+    while j < len(dna_sequence) + 1:
+        anti_codon = dna_sequence[i: j]
+        i = i + 1
+        j = j + 1
+        if anti_codon == codon:
+            positions.add(i)
+    return positions
+
+
 def main():
+    sequential_data = read_data("sequential.json", "dna_sequence")
+    codon_positions = pattern_search(sequential_data, "ATA")
+    print(codon_positions)
     sequential_data = read_data("sequential.json", "unordered_numbers")
     search_number = 5
     results = linear_search(sequential_data, search_number)
