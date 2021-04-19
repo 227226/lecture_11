@@ -42,13 +42,16 @@ def linear_search(sequence, searched_number):
 def pattern_search(dna_sequence, codon):
     positions = set()
     i = 0
-    j = i + len(codon)
-    while j < len(dna_sequence) + 1:
-        anti_codon = dna_sequence[i: j]
-        i = i + 1
-        j = j + 1
-        if anti_codon == codon:
+    while i < len(dna_sequence) - len(codon):
+        idx = 0
+        while idx < len(codon):
+            if dna_sequence[i + idx] == codon[idx]:
+                idx = idx + 1
+            else:
+                break
+        else:
             positions.add(i)
+        i = i + 1
     return positions
 
 
